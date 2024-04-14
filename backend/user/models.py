@@ -1,6 +1,13 @@
-from flask import Flask, request, session
+from flask import Flask, jsonify, request, session
 from passlib.hash import pbkdf2_sha256 as sha256
 from data.connector import database
+from bson import json_util
+import json
+
+
+# JSON Parser
+def parse_json(data):
+    return json.loads(json_util.dumps(data))
 
 
 class User:
@@ -8,10 +15,11 @@ class User:
     # Start a new session
     def start_session(self, user):
         del user["password"]
+        user["_id"] = parse_json(user["_id"])
         session["logged_in"] = True
-        # session["user"] = user
+        session["user"] = user
         session.permanent = True
-        return "Success", 200
+        return jsonify(user), 200
 
     def register(self):
 
@@ -39,8 +47,8 @@ class User:
         if user and sha256.verify(request.json["password"], user["password"]):
             return self.start_session(user)
 
-        return "Invalid username or password", 401
+        return jsonify("Invalid username or password"), 401
 
     def logout(self):
         session.clear()
-        return "Logged out", 200
+        return jsonify("Logged out"), 200

@@ -16,7 +16,8 @@ from datetime import timedelta
 app = Flask(__name__)
 app.register_blueprint(user_bp)
 app.secret_key = os.environ.get("LOCALFLIX_SECRET")
-app.permanent_session_lifetime = timedelta(seconds=30)
+app.permanent_session_lifetime = timedelta(days=30)
+app.config["SESSION_COOKIE_HTTPONLY"] = False
 
 
 # JSON Parser
@@ -25,6 +26,7 @@ def parse_json(data):
 
 
 # Decorators
+# Require login to access the API
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
