@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TextField, Button, Container } from "@mui/material";
 import { loginUser } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
     const [state, setState] = useState({
         username: "",
         password: "",
     });
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const onChange = (event) => {
@@ -25,7 +27,11 @@ export default function LoginPage() {
             ...state,
         };
 
-        dispatch(loginUser(user));
+        dispatch(loginUser(user))
+            .unwrap()
+            .then(() => {
+                navigate("/");
+            });
     };
 
     return (

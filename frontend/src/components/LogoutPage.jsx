@@ -12,6 +12,7 @@ export default function LogoutPage() {
     return (
         <>
             <h1>Logging out...</h1>
+            <h4>Maybe add links back to login page?</h4>
         </>
     );
 }
