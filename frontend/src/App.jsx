@@ -7,11 +7,8 @@ import SettingsPage from "./components/SettingsPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
 import LogoutPage from "./components/LogoutPage";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const darkTheme = createTheme({
     palette: {
