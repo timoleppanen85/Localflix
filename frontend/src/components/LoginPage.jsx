@@ -27,6 +27,11 @@ export default function LoginPage() {
             ...state,
         };
 
+        setState({
+            username: "",
+            password: "",
+        });
+
         dispatch(loginUser(user))
             .unwrap()
             .then(() => {

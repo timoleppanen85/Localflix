@@ -3,23 +3,29 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const url = "/api/user";
 
-export const loginUser = createAsyncThunk("login", async (data) => {
-    try {
-        const response = await fetch(url + "/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-        if (response.ok) {
-            const userData = await response.json();
-            return userData;
+export const loginUser = createAsyncThunk(
+    "login",
+    async (data, { rejectWithValue }) => {
+        try {
+            const response = await fetch(url + "/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            if (response.status === 200) {
+                const userData = await response.json();
+                localStorage.setItem("user", JSON.stringify(userData));
+                return userData;
+            } else {
+                return rejectWithValue("Invalid username or password");
+            }
+        } catch (error) {
+            return rejectWithValue(error);
         }
-    } catch (error) {
-        return error;
     }
-});
+);
 
 export const logoutUser = createAsyncThunk("logout", async () => {
     try {
@@ -29,7 +35,8 @@ export const logoutUser = createAsyncThunk("logout", async () => {
                 "Content-Type": "application/json",
             },
         });
-        if (response.ok) {
+        if (response.status === 200) {
+            localStorage.removeItem("user");
             return;
         }
     } catch (error) {
@@ -42,6 +49,11 @@ const initialState = {
     user: {},
 };
 
+if (localStorage.getItem("user")) {
+    initialState.isLogged = true;
+    initialState.user = JSON.parse(localStorage.getItem("user"));
+}
+
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -51,6 +63,10 @@ const authSlice = createSlice({
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.isLogged = true;
             state.user = action.payload;
+        });
+        builder.addCase(loginUser.rejected, (state, action) => {
+            state.isLogged = false;
+            state.user = {};
         });
         // Logout user
         builder.addCase(logoutUser.fulfilled, (state) => {

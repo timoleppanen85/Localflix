@@ -12,9 +12,7 @@ import Menu from "@mui/material/Menu";
 import { MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-const settings = ["Profile", "Settings", "Logout"];
-const icons = [<AccountCircleIcon />, <SettingsIcon />, <LogoutIcon />];
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 export default function Navbar() {
     const user = useSelector((state) => state.auth);
@@ -62,22 +60,33 @@ export default function Navbar() {
                             keepMounted
                             open={Boolean(anchorEl)}
                             onClose={handleClose}>
-                            {settings.map((setting, index) => (
-                                <MenuItem
-                                    component={Link}
-                                    to={`/${setting.toLowerCase()}`}
-                                    key={setting}
-                                    onClick={handleClose}
-                                    sx={{
-                                        mr: 2,
-                                        // justifyContent: "space-between",
-                                        width: 125,
-                                    }}>
-                                    {icons[index]}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    {setting}
-                                </MenuItem>
-                            ))}
+                            <MenuItem
+                                onClick={handleClose}
+                                component={Link}
+                                to="/profile">
+                                <ListItemIcon>
+                                    <AccountCircleIcon />
+                                </ListItemIcon>
+                                Profile
+                            </MenuItem>
+                            <MenuItem
+                                onClick={handleClose}
+                                component={Link}
+                                to="/settings">
+                                <ListItemIcon>
+                                    <SettingsIcon />
+                                </ListItemIcon>
+                                Settings
+                            </MenuItem>
+                            <MenuItem
+                                onClick={handleClose}
+                                component={Link}
+                                to="/logout">
+                                <ListItemIcon>
+                                    <LogoutIcon />
+                                </ListItemIcon>
+                                Logout
+                            </MenuItem>
                         </Menu>
                     </Box>
                 )}

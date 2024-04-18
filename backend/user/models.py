@@ -15,7 +15,9 @@ class User:
     # Start a new session
     def start_session(self, user):
         del user["password"]
+        del user["username"]
         user["_id"] = parse_json(user["_id"])
+        user["isLogged"] = True
         session["logged_in"] = True
         session["user"] = user
         session.permanent = True
