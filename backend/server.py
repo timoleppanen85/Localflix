@@ -17,6 +17,11 @@ app = Flask(__name__)
 app.register_blueprint(user_bp)
 app.secret_key = os.environ.get("LOCALFLIX_SECRET")
 app.permanent_session_lifetime = timedelta(days=30)
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="None",
+)
 
 
 # JSON Parser
