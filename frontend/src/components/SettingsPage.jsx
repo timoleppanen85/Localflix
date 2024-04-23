@@ -1,24 +1,50 @@
 import { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import Delete from "@mui/icons-material/Delete";
+import { Tabs, Tab } from "@mui/material";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import FormAddFlix from "./FormAddFlix.jsx";
 
 export default function SettingsPage() {
-    const [value, setValue] = useState("1");
+    const [value, setValue] = useState("0");
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     return (
-        <h2>Funky settings page</h2>
-        // <TabContext value={value}>
-        //     <TabList
-        //         onChange={handleChange}
-        //         aria-label="tabs for CRUD operations">
-        //         <Tab label="Add Flix" value="1" />
-        //         <Tab label="Edit Flix" value="2" />
-        //         <Tab label="Delete Flix" value="3" />
-        //     </TabList>
-        //     <TabPanel value="1">Add flix here</TabPanel>
-        //     <TabPanel value="2">Edit flix here</TabPanel>
-        //     <TabPanel value="3">Delete flix here</TabPanel>
-        // </TabContext>
+        <div>
+            <TabContext value={value}>
+                <TabList value={value} onChange={handleChange} centered>
+                    <Tab
+                        icon={<AddIcon />}
+                        iconPosition="start"
+                        label="Add new flix"
+                        value="0"
+                        sx={{ width: "33%" }}
+                    />
+                    <Tab
+                        icon={<EditIcon />}
+                        iconPosition="start"
+                        label="Edit flix"
+                        value="1"
+                        sx={{ width: "33%" }}
+                    />
+                    <Tab
+                        icon={<Delete />}
+                        iconPosition="start"
+                        label="Delete flix"
+                        value="2"
+                        sx={{ width: "33%" }}
+                    />
+                </TabList>
+                <TabPanel value="0">
+                    <FormAddFlix />
+                </TabPanel>
+                <TabPanel value="1">Edit flix</TabPanel>
+                <TabPanel value="2">Delete flix</TabPanel>
+            </TabContext>
+        </div>
     );
 }
