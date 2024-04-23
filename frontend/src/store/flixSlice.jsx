@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export const getFlix = createAsyncThunk("getFlix", async () => {
     const request = {
         method: "GET",
     };
-    const response = await fetch("/api", request);
+    const response = await fetch(backendUrl + "/api", request);
     const list = await response.json();
     return list;
 });

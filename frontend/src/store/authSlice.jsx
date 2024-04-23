@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const url = "/api/user";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const url = backendUrl + "api/user";
 
 export const loginUser = createAsyncThunk(
     "login",
