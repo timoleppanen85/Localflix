@@ -39,7 +39,7 @@ def login_required(f):
 @app.after_request
 def add_cors_headers(response):
     response.headers.add(
-        "Access-Control-Allow-Origin", "https://localflix.onrender.com/login"
+        "Access-Control-Allow-Origin", "https://localflix.onrender.com"
     )
     response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
     response.headers.add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
