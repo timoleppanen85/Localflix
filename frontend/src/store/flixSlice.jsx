@@ -6,7 +6,7 @@ export const getFlix = createAsyncThunk("getFlix", async () => {
     const request = {
         method: "GET",
     };
-    const response = await fetch(backendUrl + "/api", request);
+    const response = await fetch(backendUrl + "api", request);
     const list = await response.json();
     return list;
 });
