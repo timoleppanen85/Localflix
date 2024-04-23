@@ -17,11 +17,11 @@ app = Flask(__name__)
 app.register_blueprint(user_bp)
 app.secret_key = os.environ.get("LOCALFLIX_SECRET")
 app.permanent_session_lifetime = timedelta(days=30)
-app.config.update(
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE="None",
-)
+# app.config.update(
+#     SESSION_COOKIE_SECURE=True,
+#     SESSION_COOKIE_HTTPONLY=True,
+#     SESSION_COOKIE_SAMESITE="None",
+# )
 
 
 # JSON Parser
@@ -41,15 +41,15 @@ def login_required(f):
     return decorated_function
 
 
-@app.after_request
-def add_cors_headers(response):
-    response.headers.add(
-        "Access-Control-Allow-Origin", "https://localflix.onrender.com"
-    )
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
-    response.headers.add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
-    response.headers.add("Access-Control-Allow-Credentials", "true")  # allow cookies
-    return response
+# @app.after_request
+# def add_cors_headers(response):
+#     response.headers.add(
+#         "Access-Control-Allow-Origin", "https://localflix.onrender.com"
+#     )
+#     response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+#     response.headers.add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+#     response.headers.add("Access-Control-Allow-Credentials", "true")  # allow cookies
+#     return response
 
 
 @app.route("/")

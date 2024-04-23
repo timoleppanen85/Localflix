@@ -20,7 +20,7 @@ export default function FlixCard(props) {
                     sx={{ objectFit: "cover" }}
                     height={175}
                     component="img"
-                    image={"/src/videos/" + props.item.Cover}
+                    image={"/videos/" + props.item.Cover}
                     title="Video title"
                 />
                 <CardContent>

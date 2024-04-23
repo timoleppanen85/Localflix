@@ -5,7 +5,7 @@ const Player = () => {
     return (
         <div>
             <video width="90%" height="auto" controls autoPlay>
-                <source src={"/src/videos/" + filename} type="video/mp4" />
+                <source src={"/videos/" + filename} type="video/mp4" />
             </video>
         </div>
     );

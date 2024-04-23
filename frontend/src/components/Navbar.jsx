@@ -44,6 +44,27 @@ export default function Navbar() {
                         }}>
                         Localflix
                     </Typography>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="https://github.com/timoleppanen85/Localflix"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                            mx: 2,
+                            letterSpacing: ".2rem",
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}>
+                        <img
+                            src="/assets/github-mark-white.svg"
+                            alt="Github Logo"
+                            width="24px"
+                            height="24px"
+                        />
+                        &nbsp;Source
+                    </Typography>
                 </Box>
                 {user.isLogged && (
                     <Box>
