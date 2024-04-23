@@ -9,6 +9,7 @@ export const loginUser = createAsyncThunk(
     async (data, { rejectWithValue }) => {
         try {
             const response = await fetch(url + "/login", {
+                credentials: "include",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
