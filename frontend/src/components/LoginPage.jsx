@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
     const [state, setState] = useState({
-        username: "",
-        password: "",
+        username: "test",
+        password: "test",
     });
     const navigate = useNavigate();
     const dispatch = useDispatch();
